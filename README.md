@@ -1,0 +1,5 @@
+#### Welcome to OleoPhase
+
+This repository aims to compile all relevant experimental data related to liquid–liquid phase equilibria in biodiesel and oleochemical systems. The data has been gathered from peer-reviewed publications, with full references provided in the experimental_data folder and within the database script. After collection, the data was carefully processed to produce a refined and consistent dataset suitable for thermodynamic modeling and data-driven model development. The objective of this work is to provide both academia and industry with a curated resource that supports the advancement of oleochemical process design and optimization. All code used for data processing is also included in this repository.
+
+In future updates, correlated group interaction parameters for the UNIFAC and UNIFAC Dortmund thermodynamic models will be made available, along with their Python implementations. Additionally, a machine learning model trained on the refined dataset will be shared to facilitate rapid estimation of phase behavior in related systems.
