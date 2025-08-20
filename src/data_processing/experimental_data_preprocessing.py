@@ -36,11 +36,11 @@ class ExperimentalValidation:
     column_list_to_remove: list[str]
     error_threshold: float
 
-    num_components: int = field(default=None)
-    phi_names: list[str] = field(default=None) 
+    num_components: int = field(default=0)
+    phi_names: list[str] = field(default=[]) 
     
 
-    def _load_data(self) -> pl.DataFrame:
+    def _load_data(self) -> tuple[pl.DataFrame, pl.DataFrame]:
         """Load data from excel file and instantiate class attributes
 
         Returns:
@@ -167,7 +167,7 @@ class ExperimentalValidation:
         phi_data = raw_data.join(experimental_phi, on="index")  
         return additional_columns.join(phi_data, on="index")
     
-    def validate_data(self) -> pl.DataFrame:
+    def validate_data(self) -> tuple[pl.DataFrame, list[str]]:
         """Run all the preprocessing and output a combined dataframe with the experimental data, experimental phi and where only the validated tie lines remain. 
         The validation of the tie lines is done via a row wise application of the _validate_experimental_phi() function, where the pl.struct is used for better performance.
 
@@ -180,7 +180,7 @@ class ExperimentalValidation:
         experimental_phi = self._calculate_experimental_phi(raw_data=raw_data)  
         experimental_phi = experimental_phi.with_columns(
                         pl.struct(self.phi_names)
-                        .map_elements(self._validate_experimental_phi, return_dtype=int)
+                        .map_elements(self._validate_experimental_phi, return_dtype=pl.Int64)
                         .alias("Validated")
                      
             ).filter(pl.col("Validated")==1)

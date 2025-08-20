@@ -25,10 +25,10 @@ class MassBalanceReconciliation:
     validated_data: pl.DataFrame
     reference_to_group: list[str]
     component_number: int
-    phi_names: list[str] = field(default=None)
+    phi_names: list[str] = field(default=[])
 
 
-    def _minimization(self, min_variables: np.ndarray, min_fixed: np.ndarray, n_rows: int, n_columns: int, n_components: int) -> np.ndarray:
+    def _minimization(self, min_variables: np.ndarray, min_fixed: np.ndarray, n_rows: int, n_columns: int, n_components: int) -> float:
         """Minimization of the squared difference between the heavy and light phase experimental composition and the heavy and light phase reconciled composition
            to correct mass balance errors.
 

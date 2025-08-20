@@ -25,9 +25,9 @@ class Unifac:
     v: np.ndarray
     MW: np.ndarray
     T: float
-    _R: np.ndarray = field(default=None)
-    _Q: np.ndarray = field(default=None)
-    _zeta: float = field(default=None)
+    _R: np.ndarray = field(default=np.array([0]))
+    _Q: np.ndarray = field(default=np.array([0]))
+    _zeta: float = field(default=0)
     
     def _group_properties(self) -> None:
         """Instantiate the volume and surface area for each of the considered groups. These parameters are obtained from: 
